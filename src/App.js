@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import s from './App.module.css';
 
 function App() {
-  const [url, setUrl] = useState('https://www.cbr-xml-daily.ru/daily_json.js');
+  const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
   const [previousURL, setPreviousURL] = useState('');
   const [lastDaysAll, setLastDaysAll] = useState([]);
   const [lastDays, setLastDays] = useState([]);
@@ -25,23 +25,24 @@ function App() {
   }
 
   const getLastDaysAll = async(currency) => {
-    console.log(lastDays);
-    let arr = [];
-    let url = previousURL;
-    for (let i = 0; i < 10; i++) {
-      try {
-        let res = await fetch(url);
-        res = await res.json();
-        console.log(res.Valute);
-        url = res.PreviousURL;
-        const obj = {date: res.Date, valute: res.Valute};
-        arr.push(obj);
-      } catch (err) {
-        console.error(err);   
+    if (lastDaysAll.length === 0) {
+      let arr = [];
+      let url = previousURL;
+      for (let i = 0; i < 10; i++) {
+        try {
+          let res = await fetch(url);
+          res = await res.json();
+          console.log(res.Valute);
+          url = res.PreviousURL;
+          const obj = {date: res.Date, valute: res.Valute};
+          arr.push(obj);
+        } catch (err) {
+          console.error(err);   
+        }
       }
+      setLastDaysAll(arr);
     }
-    setLastDaysAll(arr);
-    setCurrent(currency)
+    setCurrent(currency);
   }
 
   const getLastDays = () => {
@@ -61,7 +62,6 @@ function App() {
       }
       return obj;
     })
-    console.log(arr);
     setLastDays(arr);
   }
 
@@ -71,11 +71,8 @@ function App() {
 
   useEffect(() => {
     getLastDays()
-  }, [lastDaysAll])
+  }, [current])
 
-  useEffect(() => {
-    console.log(lastDays)
-  }, [lastDays])
 
   return (
     <div>
@@ -88,7 +85,7 @@ function App() {
             {current === item.CharCode 
             ? <ul>
               {lastDays.map(item => 
-                <li>{item.date} <span>{item.valute.Value} {((item.valute.Value - item.valute.Previous) / item.valute.Previous) * 100}%</span></li>
+                <li key={Math.random()}>{item.date} <span>{item.valute.Value} {((item.valute.Value - item.valute.Previous) / item.valute.Previous) * 100}%</span></li>
               )}
             </ul> : ''}
           </li>)}
