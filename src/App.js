@@ -31,8 +31,9 @@ function App() {
       <h1>Valute APP</h1>
       <ul>
         {valute.map(item => 
-          <li key={item.ID}>
-            <span>{item.CharCode}</span> {item.Value} {((item.Value - item.Previous) / item.Previous) * 100}%
+          <li key={item.ID} className={s.item}>
+            <span>{item.CharCode} {item.Value} {((item.Value - item.Previous) / item.Previous) * 100}%</span>
+            <span className={s.tooltip}>{item.Name}</span>
           </li>)}
       </ul>
     </div>
