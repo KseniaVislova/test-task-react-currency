@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import s from './App.module.css';
 
 function App() {
+  const [url, setUrl] = useState('https://www.cbr-xml-daily.ru/daily_json.js');
+  const [previousURL, setPreviousURL] = useState('');
+  const [valute, setValute] = useState([]);
+
+  const getData = async() => {
+    try {
+      let res = await fetch(url)
+      res = await res.json()
+      setPreviousURL(res.PreviousURL);
+      let arr = [];
+      for (let key in res.Valute) {
+        console.log(res.Valute[key])
+        arr.push(res.Valute[key])
+      }
+      setValute(arr);
+    } catch (err) {
+      console.error(err);   
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [url])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Valute APP</h1>
+      <ul>
+        {valute.map(item => 
+          <li key={item.ID}>
+            <span>{item.CharCode}</span> {item.Value} {((item.Value - item.Previous) / item.Previous) * 100}%
+          </li>)}
+      </ul>
     </div>
   );
 }
