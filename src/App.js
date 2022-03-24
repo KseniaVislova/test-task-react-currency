@@ -8,12 +8,14 @@ function App() {
   const [lastDays, setLastDays] = useState([]);
   const [current, setCurrent] = useState('');
   const [valute, setValute] = useState([]);
+  const [today, setToday] = useState('')
 
   const getData = async() => {
     try {
       let res = await fetch(url)
       res = await res.json()
       setPreviousURL(res.PreviousURL);
+      setToday(res.Date)
       let arr = [];
       for (let key in res.Valute) {
         arr.push(res.Valute[key])
@@ -77,6 +79,7 @@ function App() {
   return (
     <div>
       <h1>Valute APP</h1>
+      <p>Сегодня: {new Date(Date.parse(today)).toDateString()}</p> 
       <ul>
         {valute.map(item => 
           <li key={item.ID} className={s.item} onClick={() => getLastDaysAll(item.CharCode)}>
@@ -85,7 +88,7 @@ function App() {
             {current === item.CharCode 
             ? <ul>
               {lastDays.map(item => 
-                <li key={Math.random()}>{item.date} <span>{item.valute.Value} {((item.valute.Value - item.valute.Previous) / item.valute.Previous) * 100}%</span></li>
+                <li key={Math.random()}>{new Date(Date.parse(item.date)).toDateString()} <span>{item.valute.Value} {((item.valute.Value - item.valute.Previous) / item.valute.Previous) * 100}%</span></li>
               )}
             </ul> : ''}
           </li>)}
