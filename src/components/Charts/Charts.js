@@ -2,17 +2,16 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import dateFormat from "dateformat";
 
 const Charts = ({ getCharts, lastDays, item, today }) => {
-
-  lastDays.unshift({
-    date: today,
-    valute: item,
-  })
-
   const arr = lastDays.map(item => {
     let obj = {};
     obj.name = dateFormat(new Date(Date.parse(item.date)).toLocaleString(), 'dd.mm.yyyy');
     obj.valute = item.valute.Value;
     return obj
+  })
+
+  arr.unshift({
+      name: dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy'),
+      valute: item.Value,
   })
 
   const data = [];
