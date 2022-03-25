@@ -101,11 +101,13 @@ function App() {
         {valute.map(item => 
           <li key={item.ID} className={s.item} onClick={() => getLastDaysAll(item.CharCode)}>
             <div className={s.item__text}>
-              <span className={s.valute}>{item.CharCode}</span> 
+              <span className={s.valute}>
+                {item.CharCode}
+                <span className={s.tooltip}>{item.Name}</span>
+              </span> 
               <span>{Math.floor(item.Value * 1000) / 1000}</span>
               <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
              </div>
-            <span className={s.tooltip}>{item.Name}</span>
             {isPopup && current === item.CharCode
             ? <div className={s.extra}>
                 <h3 className={s.extra__title}>История изменений: {item.Name} ({item.CharCode})</h3>
