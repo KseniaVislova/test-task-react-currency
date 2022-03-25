@@ -102,19 +102,26 @@ function App() {
           <li key={item.ID} className={s.item} onClick={() => getLastDaysAll(item.CharCode)}>
             <div className={s.item__text}>
               <span>{item.CharCode}</span> 
-              <span>{item.Value}</span>
+              <span>{Math.floor(item.Value * 1000) / 1000}</span>
               <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
              </div>
             <span className={s.tooltip}>{item.Name}</span>
             {isPopup && current === item.CharCode
             ? <div className={s.extra}>
-                <h3>История изменений: {item.Name} {item.CharCode}</h3>
+                <h3 className={s.extra__title}>История изменений: {item.Name} ({item.CharCode})</h3>
                 <button className={s.extra__button} onClick={() => closePopup()}>x</button>
+                <div className={s.extra__caption}>
+                  <span>Валюта</span>
+                  <span>Курс</span>
+                  <span>Номинал</span>
+                  <span>Разница с пред. днем</span>
+                </div>
                 <ul className={s.extra__list}>
                   <li key={Math.random()}>
                     <div className={s.extra__text}>
                       <span>{dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')} </span>
-                      <span>{item.Value} </span>
+                      <span>{Math.floor(item.Value * 1000) / 1000}</span>
+                      <span>{item.Nominal}</span>
                       <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
                     </div>
                   </li>
@@ -122,7 +129,8 @@ function App() {
                     <li key={Math.random()}>
                       <div className={s.extra__text}>
                         <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
-                        <span>{item.valute.Value} </span>
+                        <span>{Math.floor(item.valute.Value * 1000) / 1000}</span>
+                        <span>{item.valute.Nominal}</span>
                         <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span>
                       </div>
                     </li>
