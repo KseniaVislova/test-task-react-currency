@@ -7,6 +7,8 @@
 .title {
   text-align: center;
   text-transform: uppercase;
+  font-size: 2.5rem;
+  color: #00529c;
 }
 
 .today {
@@ -15,23 +17,37 @@
 }
 
 .list {
+  width: 80%;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
+.item {
+  position: relative;
+}
+
 .item__text {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .item__text span {
   flex: 1;
   text-align: center;
+  border: 1px solid #00529c;
+}
+
+.valute {
+  font-weight: 700;
 }
 
 .caption {
   display: flex;
   justify-content: space-between;
+  width: 80%;
+  margin: 0 auto 15px;
+  color: #00529c;
 }
 
 .caption span {
@@ -42,6 +58,8 @@
 }
 
 .tooltip {
+  position: absolute;
+  top: 0;
   opacity: 0;
 }
 
@@ -62,6 +80,7 @@
   left: 5%;
   background-color: #222;
   border: 10px solid #00529c;
+  z-index: 100;
 }
 
 .extra__title {
