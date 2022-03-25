@@ -1,5 +1,44 @@
-.item {
+.container {
+  width: 80%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
 
+.title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.today {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.item__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item__text span {
+  flex: 1;
+  text-align: center;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+}
+
+.caption span {
+  flex: 1;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .tooltip {
@@ -8,4 +47,9 @@
 
 .item:hover .tooltip {
   opacity: 1;
+}
+
+.extra__list {
+  padding: 0;
+  list-style: none;
 }

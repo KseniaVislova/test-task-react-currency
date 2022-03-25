@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import s from './App.module.css';
+import dateFormat, { masks } from "dateformat";
 
 function App() {
   const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
@@ -8,7 +9,7 @@ function App() {
   const [lastDays, setLastDays] = useState([]);
   const [current, setCurrent] = useState('');
   const [valute, setValute] = useState([]);
-  const [today, setToday] = useState('')
+  const [today, setToday] = useState(new Date());
 
   const getData = async() => {
     try {
@@ -34,7 +35,6 @@ function App() {
         try {
           let res = await fetch(url);
           res = await res.json();
-          console.log(res.Valute);
           url = res.PreviousURL;
           const obj = {date: res.Date, valute: res.Valute};
           arr.push(obj);
@@ -77,18 +77,29 @@ function App() {
 
 
   return (
-    <div>
-      <h1>Valute APP</h1>
-      <p>Сегодня: {new Date(Date.parse(today)).toDateString()}</p> 
-      <ul>
+    <div className={s.container}>
+      <h1 className={s.title}>Список курса валют</h1>
+      <p className={s.today}>Данные на: {dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')}</p> 
+      <div className={s.caption}>
+        <span>Валюта</span>
+        <span>Курс</span>
+        <span>Разница с пред. днем</span>
+      </div>
+      <ul className={s.list}>
         {valute.map(item => 
           <li key={item.ID} className={s.item} onClick={() => getLastDaysAll(item.CharCode)}>
-            <span>{item.CharCode} {item.Value} {((item.Value - item.Previous) / item.Previous) * 100}%</span>
+            <div className={s.item__text}>
+              <span>{item.CharCode}</span> 
+              <span>{item.Value}</span>
+              <span>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
+             </div>
             <span className={s.tooltip}>{item.Name}</span>
             {current === item.CharCode 
-            ? <ul>
+            ? <ul className={s.extra__list}>
               {lastDays.map(item => 
-                <li key={Math.random()}>{new Date(Date.parse(item.date)).toDateString()} <span>{item.valute.Value} {((item.valute.Value - item.valute.Previous) / item.valute.Previous) * 100}%</span></li>
+                <li key={Math.random()}>
+                  <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
+                  <span>{item.valute.Value} {Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span></li>
               )}
             </ul> : ''}
           </li>)}
