@@ -49,9 +49,32 @@
   opacity: 1;
 }
 
+.extra {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  min-height: 90%;
+  top: 5%;
+  left: 5%;
+  background-color: aquamarine;
+}
+
 .extra__list {
   padding: 0;
   list-style: none;
+}
+
+.extra__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.extra__text span {
+  flex: 1;
+  text-align: center;
 }
 
 .percent {

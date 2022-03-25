@@ -96,14 +96,27 @@ function App() {
              </div>
             <span className={s.tooltip}>{item.Name}</span>
             {current === item.CharCode 
-            ? <ul className={s.extra__list}>
-              {lastDays.map(item => 
-                <li key={Math.random()}>
-                  <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
-                  <span>{item.valute.Value} </span>
-                  <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span></li>
-              )}
-            </ul> : ''}
+            ? <div className={s.extra}>
+                <h3>История изменений: {item.Name} {item.CharCode}</h3>
+                <ul className={s.extra__list}>
+                  <li key={Math.random()}>
+                    <div className={s.extra__text}>
+                      <span>{dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')} </span>
+                      <span>{item.Value} </span>
+                      <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
+                    </div>
+                  </li>
+                  {lastDays.map(item => 
+                    <li key={Math.random()}>
+                      <div className={s.extra__text}>
+                        <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
+                        <span>{item.valute.Value} </span>
+                        <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span>
+                      </div>
+                    </li>
+                  )}
+                </ul> 
+            </div>: ''}
           </li>)}
       </ul>
     </div>
