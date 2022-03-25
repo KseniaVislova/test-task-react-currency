@@ -53,3 +53,13 @@
   padding: 0;
   list-style: none;
 }
+
+.percent {
+  color: green;
+  font-weight: 700;
+}
+
+.red {
+  color: red;
+}
+

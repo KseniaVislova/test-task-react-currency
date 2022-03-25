@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import s from './App.module.css';
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
+import classnames from "classnames";
 
 function App() {
   const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
@@ -91,7 +92,7 @@ function App() {
             <div className={s.item__text}>
               <span>{item.CharCode}</span> 
               <span>{item.Value}</span>
-              <span>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
+              <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
              </div>
             <span className={s.tooltip}>{item.Name}</span>
             {current === item.CharCode 
@@ -99,7 +100,8 @@ function App() {
               {lastDays.map(item => 
                 <li key={Math.random()}>
                   <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
-                  <span>{item.valute.Value} {Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span></li>
+                  <span>{item.valute.Value} </span>
+                  <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span></li>
               )}
             </ul> : ''}
           </li>)}
