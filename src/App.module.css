@@ -55,8 +55,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 90%;
+  width: calc(90% - 20px);
+  height: calc(90% - 20px);
+  padding: 10px;
   top: 5%;
   left: 5%;
   background-color: #222;
