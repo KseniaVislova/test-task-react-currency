@@ -123,7 +123,7 @@ function App() {
                 <h3 className={s.extra__title}>История изменений: {item.Name} ({item.CharCode})</h3>
                 <button className={s.extra__button} onClick={() => closePopup()}>x</button>
                 {isCharts ? 
-                <Charts getCharts={getCharts}/> : 
+                <Charts getCharts={getCharts} item={item} today={today} lastDays={lastDays}/> : 
                 <div>
                   <button onClick={getCharts}>Открыть график</button>
                   <div className={s.extra__caption}>

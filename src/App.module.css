@@ -93,7 +93,7 @@
   left: 5%;
   background-color: #222;
   border: 10px solid #00529c;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .extra__title {
