@@ -9,6 +9,7 @@ function App() {
   const [lastDaysAll, setLastDaysAll] = useState([]);
   const [lastDays, setLastDays] = useState([]);
   const [current, setCurrent] = useState('');
+  const [isPopup, setPopup] = useState(false);
   const [valute, setValute] = useState([]);
   const [today, setToday] = useState(new Date());
 
@@ -66,6 +67,13 @@ function App() {
       return obj;
     })
     setLastDays(arr);
+    setPopup(true);
+  }
+
+  const closePopup = () => {
+    setCurrent('');
+    setPopup(false);
+    setLastDays([]);
   }
 
   useEffect(() => {
@@ -73,8 +81,11 @@ function App() {
   }, [url])
 
   useEffect(() => {
-    getLastDays()
+    getLastDays();
   }, [current])
+
+  useEffect(() => {
+  }, [isPopup])
 
 
   return (
@@ -95,9 +106,10 @@ function App() {
               <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
              </div>
             <span className={s.tooltip}>{item.Name}</span>
-            {current === item.CharCode 
+            {isPopup && current === item.CharCode
             ? <div className={s.extra}>
                 <h3>История изменений: {item.Name} {item.CharCode}</h3>
+                <button className={s.extra__button} onClick={() => closePopup()}>x</button>
                 <ul className={s.extra__list}>
                   <li key={Math.random()}>
                     <div className={s.extra__text}>
