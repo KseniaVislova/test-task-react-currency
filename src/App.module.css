@@ -26,9 +26,6 @@
   list-style: none;
 }
 
-.item {
-  cursor: pointer;
-}
 
 .item__text {
   display: flex;
@@ -36,10 +33,12 @@
 }
 
 .item__text span {
+  display: block;
   flex: 1;
   padding: 5px;
   text-align: center;
   border: 1px solid #00529c;
+  cursor: pointer;
 }
 
 .valute {
@@ -87,8 +86,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: calc(90% - 20px);
-  height: calc(90% - 20px);
+  width: calc(90% - 40px);
+  height: calc(90% - 40px);
   padding: 10px;
   top: 5%;
   left: 5%;
@@ -98,6 +97,7 @@
 }
 
 .extra__title {
+  text-align: center;
   text-transform: uppercase;
   font-size: 1.8rem;
   color: #00529c;
@@ -106,7 +106,7 @@
 .extra__button {
   position: fixed;
   top: 10%;
-  right: 6%;
+  right: 10%;
   text-transform: uppercase;
   font-weight: 700;
   color: rgb(219, 206, 206);
@@ -152,6 +152,7 @@
 }
 
 .extra__text span {
+  display: block;
   flex: 1;
   padding: 5px 0;
   text-align: center;
@@ -165,5 +166,57 @@
 
 .red {
   color: red;
+}
+
+@media (max-width:768px) {
+  .container {
+    width: 95%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .caption {
+    width: 95%;
+  }
+
+  .list {
+    width: 95%;
+  }
+
+  .extra__caption {
+    width: 100%;
+  }
+
+  .extra__caption span {
+    font-size: 0.6rem;
+  }
+
+  .extra__list {
+    width: 100%;
+  }
+
+  .extra__text span {
+    font-size: 0.7rem;
+  }
+
+  .extra__title {
+    font-size: 1.5rem;
+  } 
+}
+
+@media (max-width:375px) {
+  .container {
+    width: 98%;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .extra__title {
+    font-size: 1.2rem;
+  } 
 }
 
