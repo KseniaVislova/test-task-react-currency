@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import s from './App.module.css';
 import dateFormat from "dateformat";
 import classnames from "classnames";
-import Charts from './components/Charts/Charts';
-import ExtraList from './components/ExtraList/ExtraList';
+import Popup from "./components/Popup/Popup";
 
 function App() {
   const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
@@ -120,14 +119,7 @@ function App() {
               <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
              </div>
             {isPopup && current === item.CharCode
-            ? <div className={s.extra}>
-                <h3 className={s.extra__title}>История изменений: {item.Name} ({item.CharCode})</h3>
-                <button className={s.extra__button} onClick={() => closePopup()}>x</button>
-                {isCharts ? 
-                <Charts getCharts={getCharts} item={item} today={today} lastDays={lastDays}/> : 
-                <ExtraList getCharts={getCharts} item={item} lastDays={lastDays} today={today}/>
-              }
-            </div>: ''}
+            ? <Popup closePopup={closePopup} isCharts={isCharts} getCharts={getCharts} item={item} lastDays={lastDays} today={today} />: ''}
           </li>)}
       </ul>
     </div>

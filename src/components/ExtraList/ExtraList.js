@@ -2,7 +2,7 @@ import dateFormat from "dateformat";
 import classnames from "classnames";
 import s from './ExtraList.module.css';
 
-const List = ({ getCharts, item, lastDays, today }) => {
+const ExtraList = ({ getCharts, item, lastDays, today }) => {
 
 
   return (<div>
@@ -36,4 +36,4 @@ const List = ({ getCharts, item, lastDays, today }) => {
   </div>)
 }
 
-export default List;
+export default ExtraList;
