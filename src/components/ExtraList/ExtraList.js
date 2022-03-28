@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 const ExtraList = ({ getCharts, item, lastDays, today }) => {
 
 
-  return (<div>
-    <button onClick={getCharts}>Открыть график</button>
+  return (<div className={s.container}>
+    <button className={s.button} onClick={getCharts}>Открыть график</button>
     <div className={s.extra__caption}>
       <span>Дата</span>
       <span>Курс</span>
