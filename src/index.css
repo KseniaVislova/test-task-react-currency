@@ -1,5 +1,5 @@
 html {
-  scroll-behavior: smooth; 
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,7 +31,7 @@ code {
     monospace;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   body {
     font-size: 14px;
   }

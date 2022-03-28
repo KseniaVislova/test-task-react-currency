@@ -103,8 +103,8 @@
   transition: all 1s;
 }
 
-@media (max-width:768px) {
-.extra__caption {
+@media (max-width: 768px) {
+  .extra__caption {
     width: 100%;
   }
 
@@ -122,12 +122,11 @@
 
   .extra__title {
     font-size: 1.5rem;
-  } 
+  }
 }
 
-@media (max-width:375px) {
+@media (max-width: 375px) {
   .extra__title {
     font-size: 1.2rem;
   } 
 }
-
