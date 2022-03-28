@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 const Charts = ({ getCharts, lastDays, item, today }) => {
   const arr = lastDays.map(item => {
     let obj = {};
-    obj.name = dateFormat(new Date(Date.parse(item.date)).toLocaleString(), 'dd.mm.yyyy');
+    obj.name = dateFormat(item.date, 'dd.mm.yyyy');
     obj.valute = item.valute.Value;
     return obj
   })
 
   arr.unshift({
-      name: dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy'),
+      name: dateFormat(today, 'dd.mm.yyyy'),
       valute: item.Value,
   })
 

@@ -17,7 +17,7 @@ const ExtraList = ({ getCharts, item, lastDays, today }) => {
     <ul className={s.extra__list}>
       <li key={Math.random()}>
         <div className={s.extra__text}>
-          <span>{dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')} </span>
+          <span>{dateFormat(today, 'dd.mm.yyyy')} </span>
           <span>{Math.floor(item.Value * 1000) / 1000}</span>
           <span>{item.Nominal}</span>
           <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
@@ -26,7 +26,7 @@ const ExtraList = ({ getCharts, item, lastDays, today }) => {
       {lastDays.map(item => 
         <li key={Math.random()}>
           <div className={s.extra__text}>
-            <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
+            <span>{dateFormat(item.date, 'dd.mm.yyyy')} </span>
             <span>{Math.floor(item.valute.Value * 1000) / 1000}</span>
             <span>{item.valute.Nominal}</span>
             <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span>

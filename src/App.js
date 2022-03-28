@@ -19,6 +19,7 @@ function App() {
       let res = await fetch(url)
       res = await res.json()
       setPreviousURL(res.PreviousURL);
+      console.log(today)
       setToday(res.Date)
       let arr = [];
       for (let key in res.Valute) {
@@ -100,7 +101,7 @@ function App() {
   return (
     <div className={s.container}>
       <h1 className={s.title}>Список курса валют</h1>
-      <p className={s.today}>Данные на: {dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')}</p> 
+      <p className={s.today}>Данные на: {dateFormat(today, 'dd.mm.yyyy')}</p> 
       <div className={s.caption}>
         <span>Валюта</span>
         <span>Курс</span>
