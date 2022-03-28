@@ -1,6 +1,7 @@
 import s from './Popup.module.css';
 import Charts from '../Charts/Charts';
 import ExtraList from '../ExtraList/ExtraList';
+import PropTypes from 'prop-types';
 
 const Popup = ({ closePopup, isCharts, getCharts, item, lastDays, today }) => {
   return (
@@ -13,6 +14,19 @@ const Popup = ({ closePopup, isCharts, getCharts, item, lastDays, today }) => {
     }
   </div>
   )
-  }
+}
+
+Popup.propTypes = {
+  closePopup: PropTypes.func,
+  isCharts: PropTypes.bool,
+  getCharts: PropTypes.func,
+  item: PropTypes.object,
+  lastDays: PropTypes.array,
+  today: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Date)
+  ]),
+ }
 
 export default Popup;

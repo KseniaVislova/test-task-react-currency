@@ -1,5 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import dateFormat from "dateformat";
+import PropTypes from 'prop-types';
 
 const Charts = ({ getCharts, lastDays, item, today }) => {
   const arr = lastDays.map(item => {
@@ -42,5 +43,16 @@ const Charts = ({ getCharts, lastDays, item, today }) => {
       </LineChart>
   </div>)
 }
+
+Charts.propTypes = {
+  getCharts: PropTypes.func,
+  item: PropTypes.object,
+  lastDays: PropTypes.array,
+  today: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Date)
+  ]),
+ }
 
 export default Charts;

@@ -1,6 +1,7 @@
 import s from './List.module.css';
 import classnames from "classnames";
 import Popup from "../Popup/Popup";
+import PropTypes from 'prop-types';
 
 const List = ({ closePopup, isCharts, getCharts, valute, lastDays, today, getLastDaysAll, isPopup, current }) => {
 
@@ -21,5 +22,21 @@ const List = ({ closePopup, isCharts, getCharts, valute, lastDays, today, getLas
       </li>)}
   </ul>)
 }
+
+List.propTypes = {
+  closePopup: PropTypes.func,
+  isCharts: PropTypes.bool,
+  isPopup: PropTypes.bool,
+  getCharts: PropTypes.func,
+  getLastDaysAll: PropTypes.func,
+  valute: PropTypes.array,
+  lastDays: PropTypes.array,
+  current: PropTypes.string,
+  today: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Date)
+  ]),
+ }
 
 export default List;

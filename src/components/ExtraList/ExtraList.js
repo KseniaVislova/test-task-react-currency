@@ -1,6 +1,7 @@
 import dateFormat from "dateformat";
 import classnames from "classnames";
 import s from './ExtraList.module.css';
+import PropTypes from 'prop-types';
 
 const ExtraList = ({ getCharts, item, lastDays, today }) => {
 
@@ -35,5 +36,16 @@ const ExtraList = ({ getCharts, item, lastDays, today }) => {
     </ul>  
   </div>)
 }
+
+ExtraList.propTypes = {
+  getCharts: PropTypes.func,
+  item: PropTypes.object,
+  lastDays: PropTypes.array,
+  today: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Date)
+  ]),
+ }
 
 export default ExtraList;
