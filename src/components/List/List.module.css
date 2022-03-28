@@ -1,0 +1,74 @@
+.list {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.item__text {
+  display: flex;
+  justify-content: center;
+}
+
+.item__text span {
+  display: block;
+  flex: 1;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #00529c;
+  cursor: pointer;
+}
+
+.valute {
+  position: relative;
+  font-weight: 700;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto 15px;
+  color: #00529c;
+}
+
+.caption span {
+  flex: 1;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tooltip {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  bottom: 5px;
+  left: 70%;
+  opacity: 0;
+  background-color: #00529c;
+  border: 1px solid #00529c;
+  border-radius: 10px 10px 10px 0;
+  z-index: 100;
+  transition: all 1s;
+}
+
+.valute:hover .tooltip {
+  opacity: 1;
+  transition: all 1s;
+}
+
+.percent {
+  color: green;
+  font-weight: 700;
+}
+
+.red {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .list {
+    width: 95%;
+  }
+}

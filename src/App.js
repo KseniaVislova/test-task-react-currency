@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import s from './App.module.css';
 import dateFormat from "dateformat";
-import classnames from "classnames";
+import List from './components/List/List'
 
 function App() {
   const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
@@ -10,6 +10,7 @@ function App() {
   const [lastDays, setLastDays] = useState([]);
   const [current, setCurrent] = useState('');
   const [isPopup, setPopup] = useState(false);
+  const [isCharts, setCharts] = useState(false);
   const [valute, setValute] = useState([]);
   const [today, setToday] = useState(new Date());
 
@@ -76,6 +77,11 @@ function App() {
     setLastDays([]);
   }
 
+  const getCharts = () => {
+    let status = !isCharts;
+    setCharts(status);
+  }
+
   useEffect(() => {
     getData();
   }, [url])
@@ -87,6 +93,9 @@ function App() {
   useEffect(() => {
   }, [isPopup])
 
+  useEffect(() => {
+  }, [isCharts])
+
 
   return (
     <div className={s.container}>
@@ -97,50 +106,7 @@ function App() {
         <span>Курс</span>
         <span>Разница с пред. днем</span>
       </div>
-      <ul className={s.list}>
-        {valute.map(item => 
-          <li key={item.ID} className={s.item} onClick={() => getLastDaysAll(item.CharCode)}>
-            <div className={s.item__text}>
-              <span className={s.valute}>
-                {item.CharCode}
-                <span className={s.tooltip}>{item.Name}</span>
-              </span> 
-              <span>{Math.floor(item.Value * 1000) / 1000}</span>
-              <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
-             </div>
-            {isPopup && current === item.CharCode
-            ? <div className={s.extra}>
-                <h3 className={s.extra__title}>История изменений: {item.Name} ({item.CharCode})</h3>
-                <button className={s.extra__button} onClick={() => closePopup()}>x</button>
-                <div className={s.extra__caption}>
-                  <span>Дата</span>
-                  <span>Курс</span>
-                  <span>Номинал</span>
-                  <span>Разница с пред. днем</span>
-                </div>
-                <ul className={s.extra__list}>
-                  <li key={Math.random()}>
-                    <div className={s.extra__text}>
-                      <span>{dateFormat(new Date(Date.parse(today)).toLocaleString(), 'dd.mm.yyyy')} </span>
-                      <span>{Math.floor(item.Value * 1000) / 1000}</span>
-                      <span>{item.Nominal}</span>
-                      <span className={classnames([s.percent], {[s.red]: item.Value > item.Previous})}>{Math.floor(((item.Value - item.Previous) / item.Previous) * 100 * 1000) / 1000} %</span>
-                    </div>
-                  </li>
-                  {lastDays.map(item => 
-                    <li key={Math.random()}>
-                      <div className={s.extra__text}>
-                        <span>{dateFormat(new Date(Date.parse(item.date)).toDateString(), 'dd.mm.yyyy')} </span>
-                        <span>{Math.floor(item.valute.Value * 1000) / 1000}</span>
-                        <span>{item.valute.Nominal}</span>
-                        <span className={classnames([s.percent], {[s.red]: item.valute.Value > item.valute.Previous})}>{Math.floor((((item.valute.Value - item.valute.Previous) / item.valute.Previous)) * 100 * 1000) / 1000} %</span>
-                      </div>
-                    </li>
-                  )}
-                </ul> 
-            </div>: ''}
-          </li>)}
-      </ul>
+      <List closePopup={closePopup} isCharts={isCharts} getCharts={getCharts} valute={valute} lastDays={lastDays} today={today} getLastDaysAll={getLastDaysAll} isPopup={isPopup} current={current} />
     </div>
   );
 }
